@@ -8,27 +8,14 @@ import Apartment from './Apartment';
 import { Typography } from '@mui/material';
 const ApartmentsList = ({ list, sortByPriseAscending,
 	sortByPriseDescending, filterByRoomsCount, removeFromList,
-	sortType,
-	setActiveType,
-	activeRoomsFilter,
-	setActiveRoomsFilter,
-	roomsCount
-}) => {
+	sortType, setActiveType, activeRoomsFilter, setActiveRoomsFilter, roomsCount }) => {
 
-	const allRooms = []
-	list.forEach(el => {
-		if (!allRooms.includes(el.rooms)) {
-			allRooms.push(el.rooms)
-		}
-	})
-	const [rooms, setRooms] = React.useState(0);
+
 	const changeRoomsCount = (event) => {
 		setActiveRoomsFilter(event.target.value);
 		filterByRoomsCount(event.target.value)
 	};
 
-
-	const [sortBy, setSortBy] = React.useState('descending');
 	const changeSortByType = (event) => {
 		setActiveType(event.target.value)
 		if (event.target.value === 'asc') {
@@ -37,6 +24,7 @@ const ApartmentsList = ({ list, sortByPriseAscending,
 			sortByPriseDescending()
 		}
 	};
+
 	return (
 		<Box mt={5}>
 			<Box sx={{ display: "flex", alignItems: 'center' }}>

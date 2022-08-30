@@ -5,9 +5,8 @@ import BasicModal from './Modal';
 
 const Apartment = ({ title, rooms, price, description, id, removeFromList }) => {
 
+	const titleForShow = title.length < 55 ? title : title.slice(0, 50) + '...'
 	return (
-
-
 		<Box mb={3} sx={{
 			display: 'flex', flexDirection: 'row', padding: '20px',
 			justifyContent: 'space-between',
@@ -15,7 +14,7 @@ const Apartment = ({ title, rooms, price, description, id, removeFromList }) => 
 
 		}}>
 			<Box alignItems={'center'} display={'flex'}>
-				<Typography mr={2} fontSize={20}>{title} </Typography>
+				<Typography mr={2} fontSize={20}>{titleForShow} </Typography>
 				<Typography>|</Typography>
 				<Typography mr={2} ml={2} fontSize={20}> {rooms} {rooms > 1 ? 'rooms' : 'room'}  </Typography>
 				<Typography>|</Typography>

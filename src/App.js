@@ -12,6 +12,7 @@ function App() {
 	const [activeRoomsFilter, setActiveRoomsFilter] = useState(0)
 	const [roomsCount, setRoomsCount] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
+
 	const updateRoomsCount = (list) => {
 		const roomsArr = [];
 		list.forEach(el => {
@@ -21,6 +22,7 @@ function App() {
 		})
 		setRoomsCount(roomsArr)
 	}
+
 	const updateList = async (sortType, roomsCount, changeRoomsCount = true) => {
 		setIsLoading(true)
 		const res = await getApartments(sortType, roomsCount)
@@ -29,17 +31,10 @@ function App() {
 			updateRoomsCount(res)
 		}
 		setIsLoading(false)
-
-		// console.log(res);
-
 	}
-	useEffect(() => {
-		updateList(activeSort, activeRoomsFilter)
-
-	}, [])
 
 	const addNewRent = async (title, rooms, price, description) => {
-		const res = await postApartments(title, rooms, price, description)
+		await postApartments(title, rooms, price, description)
 		updateList(activeSort, activeRoomsFilter)
 	}
 
@@ -51,13 +46,18 @@ function App() {
 	}
 
 	const removeFromList = async (id) => {
-		const res = await deleteApartment(id)
+		await deleteApartment(id)
 		updateList(activeSort, activeRoomsFilter)
 	}
 
 	const filterByRoomsCount = (count) => {
 		updateList(activeSort, count, false)
 	}
+
+	useEffect(() => {
+		updateList(activeSort, activeRoomsFilter)
+
+	}, [])
 
 	return (
 		<>
@@ -67,7 +67,8 @@ function App() {
 
 						<Typography fontWeight={500} textAlign={'center'} variant='h4' component="h1" >Apartments Marketplace</Typography>
 						<CreateApartmentForm addNewRent={addNewRent} />
-						<ApartmentsList list={list}
+						<ApartmentsList
+							list={list}
 							sortByPriseAscending={sortByPriseAscending}
 							sortByPriseDescending={sortByPriseDescending}
 							filterByRoomsCount={filterByRoomsCount}

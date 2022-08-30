@@ -12,9 +12,6 @@ export const useFormController = (type, defaultValue, isRequired, maxValue) => {
 				case 'number':
 					if (value < 1 || value > maxValue) {
 						setValue(value)
-						// setIsError(true)
-					} else {
-						setIsError(false)
 					}
 					break;
 
